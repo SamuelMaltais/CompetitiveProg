@@ -53,7 +53,7 @@ defences = []
 attaques = []
 resultats = []
 
-for _ in range(99999):
+for _ in range(19999):
     defences.append(defence_rolls(des_dfs, warbands_dfs))
     attaques.append(attack_rolls(des_atk, warbands_atk))
     if attaques[-1] > defences[-1]:
@@ -66,12 +66,22 @@ def to_percent(c):
     return str(c*100)[:5]+"%"
 
 win_rate = (sum(resultats) / len(resultats))
-print(to_percent(win_rate))
 
+print("\n######################### STATS #########################")
+print("L'ATTAQUANT GAGNE: ",to_percent(win_rate), 'du temps')
+
+attaques.sort()
+defences.sort()
 # Print the average
-# print("MEAN", sum(arr) / len(arr))
-# print("LOW_ROLL", str(len(arr2)*100 / len(arr)) + "%")
-# print("MEDIANE", str(arr[len(arr)//2]))
+print("\n######################## DEFENCE ########################")
+print("MEAN", sum(defences) / len(defences))
+print("LOW_ROLL (bottom 25%)", str(defences[len(defences)//4]))
+print("MEDIANE", str(defences[len(defences)//2]))
+
+print("\n######################## ATTAQUE ########################")
+print("MEAN", sum(attaques) / len(attaques))
+print("LOW_ROLL (bottom 25%)", str(attaques[len(attaques)//4]))
+print("MEDIANE", str(attaques[len(attaques)//2]))
 
 
 # # Plot the distribution
