@@ -28,10 +28,15 @@ else:
     diff = float('infinity')
     s=int(s)
     res=[]
+    if '' in options:
+        options.remove('')
+    options = list(map(int, options))
+    options = list(set(options))
+
     for op in options:
         if op == '':
             continue
-        d = abs(s - int(op))
+        d = abs(s - op)
         if d < diff:
             res = [op]
             diff = d
