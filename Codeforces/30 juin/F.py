@@ -16,13 +16,17 @@ for _ in range(int(input())):
 
     row = 0
     oldRow = ways[row][:]
+
+    psum = []
+    s=0
+    for elem in oldRow:
+        s += elem
+        psum.append(s)
+    print(psum)
     for i in range(m):
-            if grid[row][i] == 'X':
-                curr_ways = oldRow[i]
-                for j in range(max(0, i - d), min(m, i + d + 1)):
-                    if i != j:
-                        curr_ways += oldRow[j]
-                ways[row][i] = curr_ways
+        if grid[row][i] == 'X':
+            ways[row][i] = psum[min(m - 1, i + d + 1)] - psum[max(0, i - d)] - oldRow[i]
+
 
     for row in range(1, n):
         for i in range(m):
@@ -48,4 +52,5 @@ for _ in range(int(input())):
                             curr_ways += oldRow[j]
                     ways[row][i] = curr_ways 
 
+    print(ways)
     print(sum(ways[-1]) % 9982443530)
