@@ -2,7 +2,7 @@ a = input()
 b = input()
 
 if len(b) > len(a):
-    print(max(b.count('1'), len(b) - 1))
+    print()
 elif a == b:
     print(b.count('1'))
 else:
@@ -13,4 +13,3 @@ else:
         c += 1   
 
     print(max(b.count('1'), len(b) - c + 1))
-
