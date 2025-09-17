@@ -1,18 +1,26 @@
 def dist(curr, dest):
     return abs(curr[0] - dest[0]) + abs(curr[1] - dest[1])
 
-def bruteforce(nodes, visited, curr, origin, traveled):
+def bruteforce(nodes, visited, curr, origin, traveled, mem):
+    obj = tuple((tuple(visited), curr))
     if sum(visited) == len(visited):
-        return dist(curr, origin) + traveled
-    best = float('infinity')
+        mem[69] = min(dist(curr, origin) + traveled, mem[69])
+        return 
+    
+
+    if obj in mem:
+        if mem[obj] < traveled:
+            return
+    
+    mem[obj] = traveled
+
     for i in range(len(nodes)):
         if not visited[i]:
             cpy_visited = visited[:]
             cpy_visited[i] = True
-            score = bruteforce(nodes, cpy_visited, nodes[i], origin, traveled + dist(curr, nodes[i]))
-            best = min(score, best)
+            bruteforce(nodes, cpy_visited, nodes[i], origin, dist(curr, nodes[i]) + traveled, mem)
 
-    return best
+    return 
 
 for  _ in range(int(input())):
     n=input()
@@ -23,4 +31,8 @@ for  _ in range(int(input())):
         nodes.append((x,y))
     
     visited = [False for _ in range(len(nodes))]
-    print(bruteforce(nodes, visited, ori, ori, 0))
+    t = tuple([True for _ in range(len(nodes))])
+    mem = {}
+    mem[69] = float('infinity')
+    bruteforce(nodes, visited, ori, ori, 0, mem)
+    print(mem[69])
