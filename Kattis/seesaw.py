@@ -56,6 +56,7 @@ while curr_balance > 0:
     if weights == 0:
         print("impossible")
         break
+    
     what_we_need = (curr_balance / weights)
     curr_balance -= min(what_we_need*weights, max_possible_dist*weights)
 
